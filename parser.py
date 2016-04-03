@@ -1,13 +1,20 @@
 from scipy.io import wavfile
+import jsonpickle
 
-frequency, sound = wavfile.read('wavfiles/classic.wav')
+wavFilesPath = 'wavfiles/'
 
-#each sound consists of 2 channels
+class Sound(object):
+    def __init__(self, filename):
+        self.filename = filename
+        self.frequency, self.sound = wavfile.read(wavFilesPath + filename)
+        self.channel1 = self.sound[:, 0]
+        self.channel2 = self.sound[:, 1]
 
-#in order to compute some of the properties, we need to perform
-#sound normalization - convert each frame into the range of [-1,1]
+class ResultFile(object):
+    def __init__(self, soundfile):
+        self.filename = soundfile.filename
+        self.frequency = soundfile.frequency
 
-# get the first channel
-channel1 = sound[:,0] 
-
-print frequency
+soundFile = Sound('classic.wav')
+resultFile = ResultFile(soundFile)
+print(jsonpickle.encode(resultFile))

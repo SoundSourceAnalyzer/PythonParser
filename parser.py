@@ -1,6 +1,6 @@
 from scipy.io import wavfile
 
-frequency, sound = wavfile.read('wavfiles/testFile.wav')
+frequency, sound = wavfile.read('wavfiles/classic.wav')
 
 #each sound consists of 2 channels
 
@@ -10,5 +10,4 @@ frequency, sound = wavfile.read('wavfiles/testFile.wav')
 # get the first channel
 channel1 = sound[:,0] 
 
-
-
+print frequency

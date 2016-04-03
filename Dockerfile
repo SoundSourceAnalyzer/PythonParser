@@ -1,17 +1,14 @@
-FROM gliderlabs/alpine:3.3
+FROM philcryer/min-wheezy
 
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base \
-  && pip install scipy.io \
-  && rm -rf /var/cache/apk/*
+MAINTAINER Humblehound <dejtabejz@gmail.com>
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y \
+    python-numpy \
+    python-scipy
 
-ONBUILD COPY . /app
-ONBUILD RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
+CMD "mkdir app"
+COPY parser.py app/
+COPY wavfiles/* app/wavfiles/
+WORKDIR app
 
-EXPOSE 8080
-CMD ["/env/bin/python", "main.py"]
+ENTRYPOINT ["python", "parser.py"]

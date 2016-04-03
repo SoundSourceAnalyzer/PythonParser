@@ -1,7 +1,8 @@
 from scipy.io import wavfile
-import jsonpickle
+from jsonpickle import encode
 
 wavFilesPath = 'wavfiles/'
+
 
 class Sound(object):
     def __init__(self, filename):
@@ -10,11 +11,13 @@ class Sound(object):
         self.channel1 = self.sound[:, 0]
         self.channel2 = self.sound[:, 1]
 
+
 class ResultFile(object):
     def __init__(self, soundfile):
         self.filename = soundfile.filename
         self.frequency = soundfile.frequency
 
+
 soundFile = Sound('classic.wav')
 resultFile = ResultFile(soundFile)
-print(jsonpickle.encode(resultFile))
+print(encode(resultFile))

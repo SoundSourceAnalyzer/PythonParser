@@ -1,8 +1,8 @@
 from scipy.io import wavfile
-from features import mfcc
 from jsonpickle import encode
 
 wavFilesPath = 'wavfiles/'
+
 
 class Sound(object):
     def __init__(self, filename):
@@ -11,7 +11,6 @@ class Sound(object):
         self.channel1 = self.sound[:, 0]
         self.channel2 = self.sound[:, 1]
         self.duration = len(self.sound) / self.frequency
-        self.mfccFeatures = mfcc(self.sound, self.frequency)
 
 
 class ResultFile(object):
@@ -19,7 +18,7 @@ class ResultFile(object):
         self.filename = soundfile.filename
         self.frequency = soundfile.frequency
         self.duration = soundfile.duration
-        self.mfccLength = len(soundfile.mfccFeatures)
+
 
 soundFile = Sound('classic.wav')
 resultFile = ResultFile(soundFile)

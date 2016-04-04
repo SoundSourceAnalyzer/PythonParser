@@ -1,25 +1,24 @@
-FROM philcryer/min-wheezy
+FROM humblehound/yaafe-docker
 
 MAINTAINER Humblehound <dejtabejz@gmail.com>
 
+#utils
+RUN apt-get update && apt-get install -y \
+	wget \
+	unzip
+
+#core
 RUN apt-get update && apt-get install -y \
     python-numpy \
     python-scipy \
-    python-pip \
-    wget \
-    unzip
+    python-pip
 
+#json serialization
 RUN pip install jsonpickle
-
-# install dependencies-
-RUN mkdir downloads
-RUN wget --no-check-certificate https://github.com/jameslyons/python_speech_features/archive/master.zip
-RUN unzip master.zip -d /downloads/
-RUN cd /downloads/python_speech_features-master/ && python setup.py install
 
 CMD "mkdir app"
 COPY parser.py app/
 COPY wavfiles/* app/wavfiles/
 WORKDIR app
-
+EXPOSE 80
 ENTRYPOINT ["python", "parser.py"]

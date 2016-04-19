@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+#set -e
 docker build -t humblehound/pythonparser:latest .
 docker rm parser
-docker run --name=parser humblehound/pythonparser:latest
+docker run --name=parser -v blues:/app/samples:rw humblehound/pythonparser:latest
+

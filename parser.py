@@ -1,5 +1,5 @@
-from scipy.io import wavfile
-from jsonpickle import encode
+from subprocess import call
+
 
 wavFilesPath = 'wavfiles/'
 
@@ -19,7 +19,4 @@ class ResultFile(object):
         self.frequency = soundfile.frequency
         self.duration = soundfile.duration
 
-
-soundFile = Sound('classic.wav')
-resultFile = ResultFile(soundFile)
-print(encode(resultFile))
+call(["yaafe", "-b", "results", "-r", "44100", "-f", "\"mfcc: MFCC blockSize=1024 stepSize=512\"", "data/Jimmy_Penguin_-_01_-_Lie_down_back.mp3"])

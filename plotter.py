@@ -16,7 +16,7 @@ import wave
 import sys
 
 
-spf = wave.open('wavfiles/classic.wav','r')
+spf = wave.open('mfcc.csv','r')
 
 #Extract Raw Audio from Wav File
 signal = spf.readframes(-1)

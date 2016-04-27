@@ -3,12 +3,7 @@ from yaafelib import *
 from numpy import *
 import os
 
-
-
-
 genresFolder = '/app/genres'
-
-
 
 class Sound(object):
     def __init__(self, filename):
